@@ -12,9 +12,6 @@ RUN apt-get update -y \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir -p /var/log/supervisor
 
-# RUN apt-get update -y \
-#     && apt-get install -y --no-install-recommends supervisor=3.3.1-1+deb9u1 openssl=1.1.0l-1~deb9u3 build-essential=12.3 libssl-dev=1.1.0l-1~deb9u3 wget \
-# 		&& rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /var/log/supervisor
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 WORKDIR /apps/
