@@ -12,7 +12,6 @@ RUN apt-get update -y \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir -p /var/log/supervisor
 
-RUN mkdir -p /var/log/supervisor
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 WORKDIR /apps/
 ARG SQUID_VERSION=4.16
