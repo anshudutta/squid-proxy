@@ -21,7 +21,6 @@ RUN wget http://www.squid-cache.org/Versions/v4/squid-${SQUID_VERSION}.tar.gz \
 
 COPY *.pem /apps/
 COPY config/squid.conf /apps/
-COPY config/squid.cache.conf /apps/
 COPY config/whitelist.txt /apps/
 
 RUN chown -R nobody:nogroup /apps/ && \
