@@ -1,6 +1,7 @@
 ARG SQUID_VERSION
 
 FROM debian:stretch-slim
+
 # hadolint ignore=SC2034
 RUN apt-get update -y \
 	&& apt-get install -y  --no-install-recommends \
@@ -8,6 +9,7 @@ RUN apt-get update -y \
 	openssl=1.1.0l-1~deb9u3  \
 	build-essential=12.3 \
 	libssl-dev=1.1.0l-1~deb9u3 \
+	ca-certificates=20200601~deb9u2 \
 	wget=1.18-5+deb9u3 \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir -p /var/log/supervisor
@@ -24,9 +26,12 @@ RUN wget --progress=dot:giga http://www.squid-cache.org/Versions/v4/squid-${SQUI
 	&& make -j$CPU \
 	&& make install \
 	&& cd /apps \
-	&& rm -rf /apps/squid-${SQUID_VERSION} 
+	&& rm -rf /apps/squid-${SQUID_VERSION}
 
-COPY *.pem /apps/
+COPY certificates/Intermediate.pem /usr/local/share/ca-certificates/Intermediate.crt
+RUN update-ca-certificates --fresh
+
+COPY certificates/*.pem /apps/
 COPY config/squid.conf /apps/
 COPY config/whitelist.txt /apps/
 
