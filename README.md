@@ -31,6 +31,10 @@ The `./config/whitelist` has the allowed list of domains. Make changes as necess
 
 ## Push
 
+[Use pre-built images](https://hub.docker.com/repository/docker/anshudutta/squid-proxy)
+
+Or, make your own
+
 ```bash
 make push REPO=<your-repo>
 ```
