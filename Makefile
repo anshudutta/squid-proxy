@@ -10,7 +10,7 @@ build:
 	docker build . -t $(REPO)/squid-proxy:client-$(TAG)
 	
 push:
-	docker push $(REPO)/squid-proxy:certificate-$(TAG)
+	docker push $(REPO)/squid-proxy:certificates-$(TAG)
 	docker push $(REPO)/squid-proxy:server-$(TAG)
 	docker push $(REPO)/squid-proxy:client-$(TAG)
 
