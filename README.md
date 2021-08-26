@@ -56,6 +56,12 @@ Blocked
 curl https://facebook.com
 ```
 
+Check logs
+
+```bash
+docker exec squid-proxy_server_1 /bin/bash -c "tail -f /apps/squid/var/logs/access.log" 
+```
+
 ## Troubleshooting
 
 TLS code: X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY
