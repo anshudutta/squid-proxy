@@ -6,9 +6,11 @@ build:
 	docker run -it --rm -v $(PWD):/apps -w /apps alpine/openssl req -x509 -days 600 -new -nodes -key CA_key.pem -out CA_crt.pem -extensions v3_ca -config config/openssl.conf -subj "/C=US/ST=California/L=Mountain View/O=Squid/OU=Enterprise/CN=SquidCA"
 	docker run --rm -i hadolint/hadolint < Dockerfile
 	docker build . -t $(REPO)/squid-proxy:$(TAG)
+	docker build . -t $(REPO)/squid-client:$(TAG)
 	
 push:
 	docker push $(REPO)/squid-proxy:$(TAG)
+	docker push $(REPO)/squid-client:$(TAG)
 
 stop:
 	docker stop squid

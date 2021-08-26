@@ -1,0 +1,23 @@
+version: "3.9"
+services:
+  server:
+    build: .
+    ports:
+      - "3128:3128"
+    image: proxy
+    networks: 
+      - squid
+  client:
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    image: client
+    environment:
+      - http_proxy=server:3128
+      - https_proxy=server:3128
+    networks: 
+      - squid
+    entrypoint: "tail -f > /dev/null 2>&1"
+networks:
+  squid:
+    driver: bridge
