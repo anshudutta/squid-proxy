@@ -2,6 +2,60 @@
 
 Squid proxy with ssl bump
 
+## Build
+
+### Certificates
+
+Generate your own certificates and put it in
+
+- `./certificates/CA_crt.pem`
+- `./certificates/CA_key.pem`
+
+OR
+
+Generate self signed certificates
+
+```bash
+make cert
+```
+
+### Image
+
+```bash
+make build PWD=$(pwd) REPO=<your-repo>
+```
+
+### Configure
+
+The `./config/whitelist` has the allowed list of domains. Make changes as necessary.
+
+## Push
+
+```bash
+make push REPO=<your-repo>
+```
+
+## Test
+
+```bash
+docker-compose up -d --build
+docker exec -it squid-proxy_client_1 /bin/bash
+```
+
+Now from the terminal run
+
+Allowed
+
+```bash
+curl https://google.com
+```
+
+Blocked
+
+```bash
+curl https://facebook.com
+```
+
 ## Troubleshooting
 
 TLS code: X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY
