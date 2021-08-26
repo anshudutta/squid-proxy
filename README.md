@@ -43,21 +43,31 @@ make push REPO=<your-repo>
 
 ```bash
 docker-compose up -d --build
-docker exec -it squid-proxy_client_1 /bin/bash
 ```
-
-Now from the terminal run
 
 Allowed
 
 ```bash
-curl https://google.com
+docker exec squid-proxy_client_1 /bin/bash -c "curl https://google.com"            
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   220  100   220    0     0    286      0 --:--:-- --:--:-- --:--:--   286
+<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<TITLE>301 Moved</TITLE></HEAD><BODY>
+<H1>301 Moved</H1>
+The document has moved
+<A HREF="https://www.google.com/">here</A>.
+</BODY></HTML>
 ```
 
-Blocked
+Denied
 
 ```bash
-curl https://facebook.com
+docker exec squid-proxy_client_1 /bin/bash -c "curl https://facebook.com"
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (35) Unknown SSL protocol error in connection to facebook.com:443 
 ```
 
 Check logs
