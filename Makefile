@@ -9,7 +9,7 @@ build:
 	docker run --rm -i hadolint/hadolint < Dockerfile
 	docker build . -f Dockerfile.certificates -t $(REPO)/squid-proxy:certificates-$(TAG)
 	docker build . -t $(REPO)/squid-proxy:server-$(TAG)
-	docker build . -t $(REPO)/squid-proxy:client-$(TAG)
+	docker build . -f Dockerfile.client -t $(REPO)/squid-proxy:client-$(TAG)
 	
 push:
 	docker push $(REPO)/squid-proxy:certificates-$(TAG)
