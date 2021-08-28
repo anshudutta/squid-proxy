@@ -12,6 +12,9 @@ RUN apt-get update -y \
 	ca-certificates=20200601~deb9u2 \
 	curl=7.52.1-5+deb9u15 \
 	wget=1.18-5+deb9u3 \
+	iputils-ping=3:20161105-1 \
+	libnet-nslookup-perl=2.04-1 \
+	traceroute=1:2.1.0-2 \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir -p /var/log/supervisor
 
