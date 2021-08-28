@@ -10,6 +10,7 @@ RUN apt-get update -y \
 	build-essential=12.3 \
 	libssl-dev=1.1.0l-1~deb9u3 \
 	ca-certificates=20200601~deb9u2 \
+	curl=7.52.1-5+deb9u15 \
 	wget=1.18-5+deb9u3 \
 	&& rm -rf /var/lib/apt/lists/* \
 	&& mkdir -p /var/log/supervisor
