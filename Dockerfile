@@ -22,6 +22,8 @@ RUN apt-get update -y \
 	&& mkdir -p /var/log/supervisor
 
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN groupadd -g 1000 apps && useradd -u 1000 -g apps -s /apps apps
+
 WORKDIR /apps/
 ARG SQUID_VERSION=4.16
 # hadolint ignore=DL3003
@@ -44,11 +46,12 @@ COPY config/squid.conf /apps/
 COPY config/whitelist.txt /apps/
 
 RUN chown -R nobody:nogroup /apps/ && \
-	mkdir -p  /apps/squid/var/lib/ && \
+	mkdir -p /apps/squid/var/lib/ && \
 	/apps/squid/libexec/security_file_certgen -c -s /apps/squid/var/lib/ssl_db -M 4MB && \
 	/apps/squid/sbin/squid -N -f /apps/squid.conf -z && \
-	chown -R nobody:nogroup /apps/ && \
-	chgrp -R 0 /apps && chmod -R g=u /apps
+	chown -R apps:apps /apps/ 
+
+USER apps
 
 EXPOSE 3128
 
