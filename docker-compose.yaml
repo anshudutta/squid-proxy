@@ -1,23 +1,27 @@
 version: "3.9"
 services:
-  server:
-    build: .
-    ports:
-      - "3128:3128"
-    image: proxy
-    networks: 
-      - squid
   client:
     build:
       context: .
-      dockerfile: Dockerfile.client
-    image: client
+      dockerfile: Dockerfile.certificates
+    image: docker.io/local/squid-proxy:certificates-local
     environment:
       - http_proxy=server:3128
       - https_proxy=server:3128
     networks: 
       - squid
     entrypoint: "tail -f > /dev/null 2>&1"
+  server:
+    build: 
+      context: .
+      args:                                                                     
+        REPO: docker.io/local
+        TAG: local
+    ports:
+      - "3128:3128"
+    image: proxy
+    networks: 
+      - squid
 networks:
   squid:
     driver: bridge

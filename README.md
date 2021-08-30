@@ -8,8 +8,8 @@ Squid proxy with ssl bump
 
 Generate your own certificates and put it in
 
-- `./certificates/CA_crt.pem`
-- `./certificates/CA_key.pem`
+- `./certs/CA_crt.pem`
+- `./certs/CA_key.pem`
 
 OR
 

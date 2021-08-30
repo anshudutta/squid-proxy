@@ -1,10 +1,11 @@
 FROM debian:stretch-slim AS certificates
 
 RUN apt-get update -y \
-	&& apt-get install -y  --no-install-recommends ca-certificates=20200601~deb9u2 curl=7.52.1-5+deb9u15 \
+    && apt-get install -y  --no-install-recommends ca-certificates=20200601~deb9u2 curl=7.52.1-5+deb9u15 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY certificates/CA_crt.pem /usr/local/share/ca-certificates/CA_crt.crt
-COPY certificates/Intermediate.pem /usr/local/share/ca-certificates/Intermediate.crt
+COPY certs/intermediate/* /usr/local/share/ca-certificates/
+COPY certs/CA_crt.pem /usr/local/share/ca-certificates/
+RUN ls -1 /usr/local/share/ca-certificates//*.pem | xargs -L1 -I{} mv {} {}.crt
 
 RUN update-ca-certificates --fresh

@@ -1,5 +1,8 @@
+ARG REPO
+ARG TAG
 ARG SQUID_VERSION
 
+FROM ${REPO}/squid-proxy:certificates-${TAG} AS cert
 FROM debian:stretch-slim
 
 # hadolint ignore=SC2034
@@ -32,10 +35,11 @@ RUN wget --progress=dot:giga http://www.squid-cache.org/Versions/v4/squid-${SQUI
 	&& cd /apps \
 	&& rm -rf /apps/squid-${SQUID_VERSION}
 
-COPY certificates/Intermediate.pem /usr/local/share/ca-certificates/Intermediate.crt
+COPY --from=cert /usr/local/share/ca-certificates/* /usr/local/share/ca-certificates
 RUN update-ca-certificates --fresh
 
-COPY certificates/*.pem /apps/
+COPY certs/CA_key.pem /apps/
+COPY certs/CA_crt.pem /apps/
 COPY config/squid.conf /apps/
 COPY config/whitelist.txt /apps/
 
