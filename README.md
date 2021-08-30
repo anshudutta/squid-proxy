@@ -41,6 +41,12 @@ make push REPO=<your-repo>
 
 ## Test
 
+Run Makefile
+
+```bash
+make test
+```
+
 ```bash
 docker-compose up -d --build
 ```

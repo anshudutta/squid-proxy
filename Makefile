@@ -21,3 +21,10 @@ stop:
 run:
 	docker run -d --name squid -p 3128:3128 $(REPO)/squid-proxy/server:$(TAG)
 	docker exec squid /bin/bash -c "tail -f /apps/squid/var/logs/access.log"
+
+test:
+	docker-compose up -d --build
+	docker-compose ps
+	docker exec squid-proxy_client_1 /bin/bash -c "curl -v https://google.com" || true
+	docker exec squid-proxy_client_1 /bin/bash -c "curl -v https://facebook.com" || true
+	docker-compose down -v
