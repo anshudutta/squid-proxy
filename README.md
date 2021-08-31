@@ -19,6 +19,8 @@ Generate self signed certificates
 make cert
 ```
 
+Intermediate certificates are placed in `certs/intermediate`. Add as necessary
+
 ### Image
 
 ```bash
@@ -47,11 +49,7 @@ Run Makefile
 make test
 ```
 
-```bash
-docker-compose up -d --build
-```
-
-Allowed
+E.g. - Allowed
 
 ```bash
 docker exec squid-proxy_client_1 /bin/bash -c "curl https://google.com"            
@@ -66,7 +64,7 @@ The document has moved
 </BODY></HTML>
 ```
 
-Denied
+E.g - Denied
 
 ```bash
 docker exec squid-proxy_client_1 /bin/bash -c "curl https://facebook.com"
