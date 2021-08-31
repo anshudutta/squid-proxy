@@ -1,7 +1,11 @@
 FROM debian:stretch-slim AS certificates
 
 RUN apt-get update -y \
-    && apt-get install -y  --no-install-recommends ca-certificates=20200601~deb9u2 curl=7.52.1-5+deb9u15 \
+    && apt-get install -y  --no-install-recommends \
+    ca-certificates=20200601~deb9u2 \
+    curl=7.52.1-5+deb9u15 \
+    iputils-ping=3:20161105-1 \
+    libnet-nslookup-perl=2.04-1 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY certs/intermediate/* /usr/local/share/ca-certificates/
