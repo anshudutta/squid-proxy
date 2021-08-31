@@ -5,7 +5,7 @@ RUN apt-get update -y \
     ca-certificates=20200601~deb9u2 \
     curl=7.52.1-5+deb9u15 \
     iputils-ping=3:20161105-1 \
-    libnet-nslookup-perl=2.04-1 \
+    dnsutils=1:9.10.3.dfsg.P4-12.3+deb9u9 \
     && rm -rf /var/lib/apt/lists/*
 
 COPY certs/intermediate/* /usr/local/share/ca-certificates/
