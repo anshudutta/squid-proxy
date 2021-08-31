@@ -74,12 +74,6 @@ docker exec squid-proxy_client_1 /bin/bash -c "curl https://facebook.com"
 curl: (35) Unknown SSL protocol error in connection to facebook.com:443 
 ```
 
-Check logs
-
-```bash
-docker exec squid-proxy_server_1 /bin/bash -c "tail -f /apps/squid/var/logs/access.log" 
-```
-
 ## Troubleshooting
 
 TLS code: X509_V_ERR_UNABLE_TO_GET_ISSUER_CERT_LOCALLY
